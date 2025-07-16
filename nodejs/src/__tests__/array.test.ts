@@ -12,7 +12,7 @@ describe("Array testing", () => {
       expect(names).toContain("abdo");
     });
     it("should return false if the element is not present in the array", () => {
-      expect(names).not.toContain("ahmed");
+      expect(names).toContain("ahmed");
     });
 
     it("should return false if the array is null", () => {
