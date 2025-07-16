@@ -17,6 +17,10 @@ app.use(bodyParser.json());
 // map the app routes
 app.use("/api/books", bookRouter);
 
+app.use((req, res) => {
+  res.status(404).json({ message: "404 not found", data: null });
+});
+
 // bind app to the PORT
 app.listen(PORT, () => {
   console.log(`app is up and running in the ${NODE_ENV} mode on port ${PORT}`);

@@ -8,12 +8,20 @@ import {
 
 import { Request, Response } from "express";
 
-// ✅ Get all books
+// Constants for messages
+export const bookCreated = "book created successfully";
+export const bookUpdated = "book updated successfully";
+export const bookGet = (b: boolean = true) => {
+  return `book${b ? "s" : ""} retrieved successfully`;
+};
+export const failedMatcher = /failed to .* books?/;
+export const bookDeleted = "book deleted successfully";
+
 const getBooks = async (req: Request, res: Response): Promise<void> => {
   try {
     const books = await getAllBooks();
     res.json({
-      message: "books retrieved successfully",
+      message: bookGet(),
       data: { books },
     });
   } catch (error) {
@@ -21,7 +29,6 @@ const getBooks = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// ✅ Get single book
 const getOneBook = async (req: Request, res: Response): Promise<void> => {
   try {
     const bookId = req.params.id;
@@ -33,7 +40,7 @@ const getOneBook = async (req: Request, res: Response): Promise<void> => {
     }
 
     res.json({
-      message: "book retrieved successfully",
+      message: bookGet(false),
       data: { book },
     });
   } catch (error) {
@@ -41,7 +48,6 @@ const getOneBook = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// ✅ Create book
 const createOneBook = async (req: Request, res: Response): Promise<void> => {
   try {
     const { title, description, price } = req.body;
@@ -56,7 +62,7 @@ const createOneBook = async (req: Request, res: Response): Promise<void> => {
     const book = await createBook({ title, description, price });
 
     res.status(201).json({
-      message: "book created successfully",
+      message: bookCreated,
       data: { book },
     });
   } catch (error) {
@@ -64,7 +70,6 @@ const createOneBook = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// ✅ Update book
 const updateOneBook = async (req: Request, res: Response): Promise<void> => {
   try {
     const bookId = req.params.id;
@@ -80,7 +85,7 @@ const updateOneBook = async (req: Request, res: Response): Promise<void> => {
     const updated = await updateBook(book, { title, description, price });
 
     res.json({
-      message: "book updated successfully",
+      message: bookUpdated,
       data: { book: updated },
     });
   } catch (error) {
@@ -88,7 +93,6 @@ const updateOneBook = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// ✅ Delete book
 const deleteOneBook = async (req: Request, res: Response): Promise<void> => {
   try {
     const bookId = req.params.id;
@@ -101,7 +105,7 @@ const deleteOneBook = async (req: Request, res: Response): Promise<void> => {
 
     await deleteBook(book);
 
-    res.json({ message: "book deleted successfully" });
+    res.json({ message: bookDeleted });
   } catch (error) {
     res.status(500).json({ message: "failed to delete book" });
   }

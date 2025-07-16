@@ -16,6 +16,9 @@ const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
 // map the app routes
 app.use("/api/books", books_router_js_1.bookRouter);
+app.use((req, res) => {
+    res.status(404).json({ message: "404 not found", data: null });
+});
 // bind app to the PORT
 app.listen(env_js_1.PORT, () => {
     console.log(`app is up and running in the ${env_js_1.NODE_ENV} mode on port ${env_js_1.PORT}`);

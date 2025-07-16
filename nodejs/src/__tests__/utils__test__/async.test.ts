@@ -1,4 +1,4 @@
-import { orders, ordersWithAsync, ordersWithPromise } from "../utils/orders";
+import { orders, ordersWithAsync, ordersWithPromise } from "../../utils/orders";
 
 describe("Async testing", () => {
   describe("is async function working correctly ", () => {
