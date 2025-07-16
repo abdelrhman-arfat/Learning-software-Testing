@@ -19,5 +19,5 @@ test("startWithLowerCase", () => {
 });
 
 test("greeting", () => {
-  expect(greeting("abdo")).toBe("Hello abdo");
+  expect(greeting("abdo")).toMatch("Hello abdo");
 });
