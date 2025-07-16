@@ -8,6 +8,14 @@ const config: Config.InitialOptions = {
   transform: {
     "^.+\\.ts$": "ts-jest",
   },
+  globals: {
+    "ts-jest": {
+      useESM: true,
+    },
+  },
+  moduleNameMapper: {
+    "^(.*)\\.js$": "$1", // This is to handle ESM imports in Jest and delete the .js extension
+  },
 };
 
 export default config;

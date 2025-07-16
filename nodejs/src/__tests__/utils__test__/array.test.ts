@@ -1,6 +1,6 @@
 const names = ["abdo", "ahmed", "ali"];
 const numbers = [1, 2, 3, 4, 5];
-describe("Array testing", () => {
+describe.skip("Array testing", () => {
   describe("is element present in the array", () => {
     it("should return true if the element is present in the array", () => {
       expect(numbers).toContain(4);

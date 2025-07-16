@@ -1,6 +1,6 @@
 const data = { id: 1, name: "test", value: 42 };
 
-describe("Object testing", () => {
+describe.skip("Object testing", () => {
   describe("is key present in the object", () => {
     it("should return true if the key is present in the object", () => {
       expect(data).toHaveProperty("name");

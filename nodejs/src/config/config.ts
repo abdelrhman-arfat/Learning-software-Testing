@@ -1,13 +1,9 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { DB_NAME, MONGODB_URI, NODE_ENV } from "../constants/env.js";
 
 dotenv.config();
 
-if (!MONGODB_URI) {
-}
-
-if (NODE_ENV === "testing") {
+if (process.env.NODE_ENV === "testing") {
   Object.assign(process.env, {
     PORT: 5000,
     DB_NAME: "books-test",
@@ -15,10 +11,14 @@ if (NODE_ENV === "testing") {
       "mongodb://user:password@localhost:27017/books-test?authSource=admin",
   });
 }
+const { MONGODB_URI, DB_NAME } = process.env;
 
+if (!MONGODB_URI) {
+  throw new Error("MONGODB_URI is not defined in the environment variables");
+}
 // database connection
 mongoose
-  .connect(MONGODB_URI, {
+  .connect(MONGODB_URI as string, {
     authSource: "admin",
   })
   .then(() => console.log(`connected successfully to DB: ${DB_NAME}`))

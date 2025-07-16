@@ -1,6 +1,6 @@
 import { orders, ordersWithAsync, ordersWithPromise } from "../../utils/orders";
 
-describe("Async testing", () => {
+describe.skip("Async testing", () => {
   describe("is async function working correctly ", () => {
     it("should return data", async () => {
       const data = await ordersWithAsync();

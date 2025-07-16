@@ -9,7 +9,7 @@ import { NODE_ENV, PORT } from "./constants/env.js";
 import { bookRouter } from "./resources/books/books.router.js";
 
 // create app instance and get port
-const app = express();
+export const app = express();
 
 // configure app
 app.use(bodyParser.json());
