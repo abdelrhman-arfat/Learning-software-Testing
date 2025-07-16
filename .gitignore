@@ -1,4 +1,10 @@
+# Node.js project files to ignore
 node_modules
+dist
+
 
 .env*
+
+
+
 
