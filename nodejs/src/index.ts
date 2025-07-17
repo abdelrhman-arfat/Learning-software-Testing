@@ -9,7 +9,7 @@ import { NODE_ENV, PORT } from "./constants/env.js";
 import { bookRouter } from "./resources/books/books.route.js";
 
 // create app instance and get port
-export const app = express();
+const app = express();
 
 // configure app
 app.use(bodyParser.json());
@@ -22,6 +22,8 @@ app.use((req, res) => {
 });
 
 // bind app to the PORT
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`app is up and running in the ${NODE_ENV} mode on port ${PORT}`);
 });
+
+export { server };
