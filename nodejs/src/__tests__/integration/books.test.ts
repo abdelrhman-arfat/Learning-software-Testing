@@ -4,6 +4,7 @@ import "../../config/config";
 import * as booksService from "../../resources/books/books.service";
 import { Book } from "../../resources/books/books.model";
 import { server } from "../../index";
+import { title } from "process";
 
 /**
  * @description helper functions after and before the test
@@ -20,7 +21,13 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  server.close();
+  await new Promise((resolve, reject) => {
+    server.close((err) => {
+      if (err) return reject(err);
+      resolve(null);
+    });
+  });
+
   await Book.deleteMany({});
   await mongoose.disconnect();
 });
@@ -66,17 +73,43 @@ describe("Books Service", () => {
     });
   });
   describe("API Book Test", () => {
-    it("test the to get the BOOK", async () => {
+    it("test /api/books success ", async () => {
       const res = await request(server).get("/api/books");
       expect(res.status).toBe(200);
     });
-    it("test", async () => {
-      const book = await Book.insertOne({ title: "Book_TEST" });
+    it("test GET /api/books/:id success", async () => {
+      const book = await Book.create({ title: "Book_TEST" });
       const res = await request(server).get(`/api/books/${book._id}`);
       expect(res.status).toBe(200);
       const data = res.body.data.book;
       expect(data.title).toMatch(book.title);
       expect(data._id).toBeDefined();
+    });
+    it("test GET /api/books/:id not found", async () => {
+      // fake id to test: 687803ebd5b242eaae75de04
+      const res = await request(server).get(
+        `/api/books/687803ebd5b242eaae75de04`
+      );
+      expect(res.status).toBe(404);
+      expect(res.body.message).toMatch(/^404 not found/i);
+    });
+    it("test PUT /api/books/:id not found ", async () => {
+      // fake id to test: 687803ebd5b242eaae75de04
+      const res = await request(server).put(
+        `/api/books/687803ebd5b242eaae75de04`
+      );
+      expect(res.status).toBe(404);
+      expect(res.body.message).toMatch(/^404 not found/i);
+    });
+    it("test PUT /api/books/:id success ", async () => {
+      // fake id to test: 687803ebd5b242eaae75de04
+      const book = await Book.create({ title: "Book_TEST" });
+      const res = await request(server)
+        .put(`/api/books/${book._id}`)
+        .send({ title: "Book Updated" });
+
+      expect(res.status).toBe(200);
+      expect(res.body.data.book.title).toMatch("Book Updated");
     });
   });
 });

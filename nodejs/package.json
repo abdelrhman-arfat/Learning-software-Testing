@@ -12,8 +12,8 @@
     "db:stop": "docker-compose down",
     "db:reset": "docker-compose down && docker-compose up -d",
     "build": "tsc",
-    "test": "cross-env NODE_ENV=testing jest --config=jest.config.ts "
-  },
+    "test": "cross-env NODE_ENV=testing jest --config=jest.config.ts"
+  }, 
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.13",

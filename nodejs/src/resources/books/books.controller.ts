@@ -84,7 +84,7 @@ const updateOneBook = async (req: Request, res: Response): Promise<void> => {
 
     const updated = await updateBook(book, { title, description, price });
 
-    res.json({
+    res.status(200).json({
       message: bookUpdated,
       data: { book: updated },
     });
