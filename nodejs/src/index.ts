@@ -6,7 +6,7 @@ import "./config/config.js";
 
 // routes
 import { NODE_ENV, PORT } from "./constants/env.js";
-import { bookRouter } from "./resources/books/books.router.js";
+import { bookRouter } from "./resources/books/books.route.js";
 
 // create app instance and get port
 export const app = express();

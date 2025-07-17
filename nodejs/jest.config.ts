@@ -14,7 +14,7 @@ const config: Config.InitialOptions = {
     },
   },
   moduleNameMapper: {
-    "^(.*)\\.js$": "$1", // This is to handle ESM imports in Jest and delete the .js extension
+    "^(.*)\\.js$": "$1", // This is to handle ESM imports in Jest the .js extension
   },
 };
 

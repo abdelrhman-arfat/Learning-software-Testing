@@ -8,6 +8,9 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "concurrently \"tsc --watch\" \"nodemon dist/index.js\"",
+    "db:run":"docker-compose up -d",
+    "db:stop":"docker-compose down",
+    "db:reset":"docker-compose down && docker-compose up -d",
     "build": "tsc",
     "test": "cross-env NODE_ENV=testing jest --config=jest.config.ts"
   },
