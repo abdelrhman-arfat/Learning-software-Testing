@@ -18,7 +18,6 @@ const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
 // map the app routes
 app.use("/api/books", books_route_js_1.bookRouter);
-app.use("/page", express_1.default.static(path_1.default.join(__dirname, "..", "pages")));
 app.get("/page/home", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "..", "pages", "home.html"));
 });

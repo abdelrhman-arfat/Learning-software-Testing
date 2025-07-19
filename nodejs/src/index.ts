@@ -18,7 +18,6 @@ app.use(bodyParser.json());
 // map the app routes
 app.use("/api/books", bookRouter);
 
-app.use("/page", express.static(path.join(__dirname, "..", "pages")));
 app.get("/page/home", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "pages", "home.html"));
 });
